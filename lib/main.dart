@@ -25,7 +25,6 @@ class QuoteApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.system,
       home: const HomeScreen(),
-      >
     );
   }
 }
