@@ -118,7 +118,11 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.favorite),
+            icon: Badge(
+              label: Text(_favorites.length.toString()),
+              isLabelVisible: _favorites.isNotEmpty,
+              child: const Icon(Icons.favorite),
+            ),
             onPressed: () {
               Navigator.push(
                 context,
@@ -143,74 +147,74 @@ class _HomeScreenState extends State<HomeScreen> {
         child: _isLoading
             ? const Center(child: CircularProgressIndicator())
             : _currentQuote == null
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.error_outline, size: 60, color: Colors.grey),
-                        const SizedBox(height: 16),
-                        const Text('Failed to load quote'),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: _fetchQuote,
-                          child: const Text('Retry'),
-                        ),
-                      ],
-                    ),
-                  )
-                : SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        children: [
-                          QuoteCard(quote: _currentQuote!),
-                          const SizedBox(height: 24),
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            alignment: WrapAlignment.center,
-                            children: [
-                              ElevatedButton.icon(
-                                onPressed: _toggleFavorite,
-                                icon: Icon(
-                                  _isFavorite() ? Icons.favorite : Icons.favorite_border,
-                                ),
-                                label: Text(_isFavorite() ? 'Favorited' : 'Favorite'),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: _isFavorite()
-                                      ? Colors.red
-                                      : null,
-                                ),
-                              ),
-                              OutlinedButton.icon(
-                                onPressed: _copyToClipboard,
-                                icon: const Icon(Icons.copy),
-                                label: const Text('Copy'),
-                              ),
-                              OutlinedButton.icon(
-                                onPressed: _shareQuote,
-                                icon: const Icon(Icons.share),
-                                label: const Text('Share'),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 24),
-                          ElevatedButton.icon(
-                            onPressed: _fetchQuote,
-                            icon: const Icon(Icons.refresh),
-                            label: const Text('New Quote'),
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 32,
-                                vertical: 16,
-                              ),
-                            ),
-                          ),
-                        ],
+            ? Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.error_outline, size: 60, color: Colors.grey),
+              const SizedBox(height: 16),
+              const Text('Failed to load quote'),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: _fetchQuote,
+                child: const Text('Retry'),
+              ),
+            ],
+          ),
+        )
+            : SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                QuoteCard(quote: _currentQuote!),
+                const SizedBox(height: 24),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    ElevatedButton.icon(
+                      onPressed: _toggleFavorite,
+                      icon: Icon(
+                        _isFavorite() ? Icons.favorite : Icons.favorite_border,
+                      ),
+                      label: Text(_isFavorite() ? 'Favorited' : 'Favorite'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _isFavorite()
+                            ? Colors.red
+                            : null,
                       ),
                     ),
+                    OutlinedButton.icon(
+                      onPressed: _copyToClipboard,
+                      icon: const Icon(Icons.copy),
+                      label: const Text('Copy'),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: _shareQuote,
+                      icon: const Icon(Icons.share),
+                      label: const Text('Share'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton.icon(
+                  onPressed: _fetchQuote,
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('New Quote'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 16,
+                    ),
                   ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

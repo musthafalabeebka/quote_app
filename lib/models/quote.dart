@@ -2,30 +2,30 @@ class Quote {
   final String id;
   final String content;
   final String author;
-  final List<String> tags;
+  final String? category;
 
   Quote({
     required this.id,
     required this.content,
     required this.author,
-    required this.tags,
+    this.category,
   });
 
   factory Quote.fromJson(Map<String, dynamic> json) {
     return Quote(
-      id: json['_id'] ?? '',
-      content: json['content'] ?? '',
+      id: json['id']?.toString() ?? DateTime.now().toString(),
+      content: json['quote'] ?? json['content'] ?? '',
       author: json['author'] ?? 'Unknown',
-      tags: List<String>.from(json['tags'] ?? []),
+      category: json['category'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      '_id': id,
-      'content': content,
+      'id': id,
+      'quote': content,
       'author': author,
-      'tags': tags,
+      'category': category,
     };
   }
 }

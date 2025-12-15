@@ -58,20 +58,14 @@ class QuoteCard extends StatelessWidget {
                 ),
               ],
             ),
-            if (quote.tags.isNotEmpty) ...[
+            if (quote.category != null && quote.category!.isNotEmpty) ...[
               const SizedBox(height: 16),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: quote.tags.map((tag) {
-                  return Chip(
-                    label: Text(
-                      tag,
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                    padding: const EdgeInsets.all(4),
-                  );
-                }).toList(),
+              Chip(
+                label: Text(
+                  quote.category!,
+                  style: const TextStyle(fontSize: 12),
+                ),
+                padding: const EdgeInsets.all(4),
               ),
             ],
           ],
