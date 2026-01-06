@@ -32,7 +32,7 @@ This app uses the [Quotable API](https://api.quotable.io/) - a free, open-source
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/flutter-quote-app.git
+git clone https://github.com/musthafalabeebka/flutter-quote-app.git
 cd flutter-quote-app
 ```
 
